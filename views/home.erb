@@ -9,7 +9,10 @@
   <body>
 
     <h1>Quora Clone</h1>
-
+    <% Question.all.each do |q| %>
+    <%= q.text %>
+    <% end %>
   </body>
+
 
 </html>
