@@ -39,3 +39,5 @@ end
 #cookies[:password] = params["password"]
 
 #@username = nil || cookies[:username]
+
+#https://learn.co/lessons/sinatra-user-auth
