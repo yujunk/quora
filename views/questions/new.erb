@@ -1,5 +1,7 @@
 <h2> New Question </h2>
 
+<p> You are user [<%= @user.username %>].</p>
+
 <form method="POST" action="/questions/new/done">
 	<p> Username: <input type="text" name="username"> </p>
 	<p> Your question: <input type="text" name="text"> </p>

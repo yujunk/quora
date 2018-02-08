@@ -1,28 +1,43 @@
+#refactored
 get '/' do
- 	erb :"home"
+	@user = User.find_by(id: cookies[:id])
+	if @user
+		erb :"home"
+	else
+		redirect "/login"
+	end
 end
 
+#not refactored
 get '/questions/new' do
-	erb :"questions/new"
+
+	if User.find_by(id: cookies[:id])
+		@user = User.find_by(id: cookies[:id])
+		erb :"questions/new"
+	else
+		redirect "/login"
+	end
 end 
 
+#refactored following
 get '/questions' do
-	@questions = Question.all
+	@user = User.find_by(id: cookies[:id])
+	if @user
+		@questions = Question.all
+		erb :"questions/show"
+	else
+		redirect "/login"
+	end
 
-	erb :"questions/show"
 end
 
 post '/questions/new/done' do 
-	question = Question.create(username: params[:username], text: params[:text], upvote: params[:upvote])
-	# <#Question:1233 id: 1, username: slwkerjle>
-	@id_new_done = question.id
-	@username_new_done = question.username
-	@text_new_done = question.text
+	@questions = Question.create(username: params[:username], text: params[:text], upvote: params[:upvote])
 
 	erb :"questions/newdone"
 end
 
-get '/questions/edit/:id' do	#/questions/:id/edit - is the convention
+get '/questions/edit/:id' do	
 	@find_id = Question.find_by(id: params[:id])
 
 	erb :"questions/edit"
@@ -33,12 +48,6 @@ put '/questions/edit/:id' do
 	@find_id = Question.find_by(id: params[:id])
 
 	@find_id.update(username: params[:username], text: params[:text], upvote: params[:upvote])
-	#true
-	#can't put into object and ask for column .id
-
-	@id_new_done = @find_id.id
-	@username_new_done = @find_id.username
-	@text_new_done = @find_id.text
 
 	erb :"questions/newdone"
 end
@@ -59,7 +68,7 @@ delete '/questions/delete/:id' do
 end
 
 get '/questions/:id' do
-	@question = Question.find(params[:id]) #find is always for id, find_by is for anything else
+	@question = Question.find(params[:id]) 
 	@answers_from_question = @question.answers
 	
 	erb :"questions/showid"
