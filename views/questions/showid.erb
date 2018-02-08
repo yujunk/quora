@@ -1,6 +1,28 @@
 <h2> Singular question </h2>
 
-<%= @question.username %>
-<%= @question.text %>
+<p> Question id: <b> <%= @question.id %> </b>?</p>
+<p> Username: <b> <%= @question.username %> </b> </p>
+<p> Question: <b> <%= @question.text %> </b> </p>
 
-<a href = "/questions/new"> Back to form </a>
+
+<a href = "questions/edit/<%= @question.id %>"> Edit Me </a>
+<br>
+<a href = "questions/delete/<%= @question.id %>"> Delete Me </a>
+<br>
+<br>
+<a href = "../answers/new/<%= @question.id %>"> Answer Question </a>
+<br>
+<br>
+<a href = "/questions/new"> Back to form </a> 
+<br>
+
+<p> 
+<% @answers_from_question.each do |answer| %>
+	<%= answer.id %>
+	||
+	<%= answer.text %>
+	||
+	<%= answer.username %>
+	<br>
+<% end %>
+</p>

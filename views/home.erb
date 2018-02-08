@@ -9,9 +9,13 @@
   <body>
 
     <h1>Quora Clone</h1>
-    <% Question.all.each do |q| %>
-    <%= q.text %>
-    <% end %>
+    <ul>
+    	<li>Post a new question <a href = "/questions/new"> here</a>.</li>
+    	<li>Show all questions <a href = "/questions"> here</a>.</li>
+      <br>
+      <li>Show all answers <a href = "/answers"> here</a>.</li>
+	</ul>
+
   </body>
 
 

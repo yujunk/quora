@@ -1,15 +1,21 @@
 <h2> List of questions </h2>
+<p> 
+	<b> Add a <a href = "/questions/new"> new</a> question </b> 
+</p>
 
+<p> <i> id || Questions || Username </i> </p>
+<p>
 <% @questions.each do |question| %>
+	<%= question.id %>
+	||
 	<%= question.text %>
-	|
+	||
 	<%= question.username %>
-	|
-	<% question.id %>
-	<a href = "questions/edit/<%= question.id %>"> Edit Me </a>
+	||
+	<a href = "questions/<%= question.id %>"> Show Me </a>
 	<br>
 <% end %>
+</p>
 
-<a href = "/questions/new"> Back to form </a>
 
 <!-- @question object needed here, so other object in -->

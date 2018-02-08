@@ -1,0 +1,12 @@
+<h2> Delete Question </h2>
+
+<p> Are you sure you want to delete question with the id: <b> <%= @find_id.id %> </b>?</p>
+<p> Username: <b> <%= @find_id.username %> </b> </p>
+<p> Question: <b> <%= @find_id.text %> </b> </p>
+
+<form action="/questions/delete/<%=@find_id.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Article?">
+</form>
+
+<p> Return to all questions <a href = "/questions"> here</a> </p>

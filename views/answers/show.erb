@@ -1,0 +1,18 @@
+<h2> List of answers </h2>
+
+<p> <i> id || Answers || Username </i> </p>
+<p>
+<% @answer.each do |answer| %>
+	<%= answer.id %>
+	||
+	<%= answer.text %>
+	||
+	<%= answer.username %>
+	||
+	<%= answer.question_id %>
+	<br>
+<% end %>
+</p>
+
+
+<!-- @question object needed here, so other object in -->

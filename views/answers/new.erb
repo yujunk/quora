@@ -1,0 +1,8 @@
+<h2> New Answer </h2>
+
+
+<form method="POST" action="/answers/new/<%= @question.id %>">
+	<p> Username: <input type="text" name="username"> </p>
+	<p> Your answer: <input type="text" name="text"> </p>
+	<input type="submit">
+</form>

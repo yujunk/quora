@@ -1,8 +1,9 @@
 <h2> Edit Question </h2>
 
-<%= @find_id.text %>
+<p> You are editing question with the id: <b> <%= @find_id.id %> </b> </p>
 
-<form method="POST" action= <%= "/questions/edit/" + @find_id.id.to_s %> >
+<form method="POST" action= "/questions/edit/<%= @find_id.id %>" >
+	<input type="hidden" name="_method" value="PUT">
 	<p> Username: <input type="text" name="username"> </p>
 	<p> Your question: <input type="text" name="text"> </p>
 	<p> Good question? Up, neutral or down: <input type="text" name="upvote"> </p>
