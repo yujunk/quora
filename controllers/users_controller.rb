@@ -18,7 +18,7 @@ post "/register" do
 		check = User.find_by(random_string: string)
 	end
 	
-	user = User.create(username: params[:username], password: params[:password], random_string: string)
+	@user = User.create(username: params[:username], password: params[:password], random_string: string)
 	cookies[:id] = @user.random_string
  	redirect "/login"
 end
@@ -44,7 +44,7 @@ end
 post "/login" do
   	@user = User.find_by(username: params[:username], password: params[:password])
 
-  	if @user 
+  	if @user && @user.authenticate(params[:username][:password])
 		cookies[:id] = @user.random_string
 		redirect "/" #redirect brings to action controller and does all action controller itens, erb just displays the html but then you would have to code everything again within the current action controller.
 	else
@@ -58,7 +58,6 @@ get "/logout" do
 
 	redirect "/login"
 end
-
 
 
 #cookies[:username] = params["username"]
@@ -85,3 +84,8 @@ end
 	#Product.all.map(&:p) 
 	#-- is the same as below --
 	#Product.all.map { |x| x.p }
+
+## Replaces password_direct with password column so that password_direct for previous users before bcrypt can be assigned to not nil
+# users.where.not(:password => nil).each do |x|
+# 	x.password_digest = x[:password]
+# 	end
