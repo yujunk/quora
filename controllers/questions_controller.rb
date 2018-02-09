@@ -1,6 +1,6 @@
 #refactored
 get '/' do
-	@user = User.find_by(id: cookies[:id])
+	@user = User.find_by(random_string: cookies[:id])
 	if @user
 		erb :"home"
 	else
@@ -11,8 +11,8 @@ end
 #not refactored
 get '/questions/new' do
 
-	if User.find_by(id: cookies[:id])
-		@user = User.find_by(id: cookies[:id])
+	if User.find_by(random_string: cookies[:id])
+		@user = User.find_by(random_string: cookies[:id])
 		erb :"questions/new"
 	else
 		redirect "/login"
@@ -21,7 +21,7 @@ end
 
 #refactored following
 get '/questions' do
-	@user = User.find_by(id: cookies[:id])
+	@user = User.find_by(random_string: cookies[:id])
 	if @user
 		@questions = Question.all
 		erb :"questions/show"
